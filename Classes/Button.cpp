@@ -35,7 +35,12 @@ int Button::getNextId()
 
 std::string Button::getFont()
 {
-	return font;
+	return font == "" ? "Marker Felt.ttf" : font;
+}
+
+int Button::getFontSize()
+{
+	return fontSize;
 }
 
 void Button::setContext(std::string cont)
@@ -49,4 +54,8 @@ void Button::setFont(std::string fnt)
 void Button::setNextId(int id)
 {
 	nextId = id;
+}
+void Button::setFontSize(int sz)
+{
+	fontSize = sz;
 }

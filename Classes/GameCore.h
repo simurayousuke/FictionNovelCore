@@ -4,30 +4,32 @@
 #include "cocos2d.h"
 #include "Stage.h"
 #include "GameScene.h"
+#include "StatusManager.h"
 #include <map>
 
 class GameCore
 {
 public:
 	static GameCore* getInstance();
-	static Stage getCurrentStage();
-	static void nextStage();
-	static void init();
-	static void run();
+	void nextStage();
+	void nextStage(int id);
+	void init();
+	void run();
 	~GameCore();
 private:
 	static GameCore* instance;
+	void loadStage();
 	GameCore();
 	//把复制构造函数和=操作符也设为私有,防止被复制
 	//GameCore(const GameCore&);
 	//GameCore& operator=(const GameCore&);
-	static std::map<int, Stage> stageMap;
+	std::map<int, Stage> stageMap;
 	/*
 		0.context
 		1.nextId
 	*/
-	static Stage currentStage;
-	static int currentId;
+	//Stage currentStage;
+	//int currentId;
 };
 
 #endif // _GAME_CORE_H_

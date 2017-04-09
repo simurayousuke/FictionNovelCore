@@ -60,17 +60,21 @@ void Stage::setBg(std::string s)
 }
 void Stage::setConversationBg(std::string s)
 {
-	conversationbg = s;
+	conversationBg = s;
 }
 void Stage::setVoice(std::string s)
 {
 	voice = s;
 }
+void Stage::setFontSize(int sz)
+{
+	fontSize = sz;
+}
 
 
 std::string Stage::getFont()
 {
-	return font;
+	return font==""? "Marker Felt.ttf" : font;
 }
 bool Stage::hasButton()
 {
@@ -94,9 +98,13 @@ std::string Stage::getBg()
 }
 std::string Stage::getConversationBg()
 {
-	return conversationbg;
+	return conversationBg;
 }
 std::string Stage::getVoice()
 {
 	return voice;
+}
+int Stage::getFontSize()
+{
+	return fontSize;
 }

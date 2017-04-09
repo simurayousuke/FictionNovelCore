@@ -3,9 +3,9 @@
 USING_NS_CC;
 
 GameCore* GameCore::instance = NULL;
-int GameCore::currentId = 0;
-Stage GameCore::currentStage = Stage();
-std::map<int, Stage> GameCore::stageMap = std::map<int, Stage>();
+//int GameCore::currentId = 0;
+//Stage GameCore::currentStage = Stage();
+//std::map<int, Stage> GameCore::stageMap = std::map<int, Stage>();
 
 GameCore::GameCore()
 {
@@ -43,10 +43,12 @@ void GameCore::init()
 	{
 		Stage stage;
 		auto thisStageMap = e.asValueMap();//将键值转化成Map格式，放入txt_map中
-		bool hasButton = thisStageMap.at("hasbutton").asString() == "true" ? true : false;
+		bool hasButton = (thisStageMap.at("hasbutton").asString() == "true");
+		stage.setHasButton(hasButton);
 
 		stage.setContext(thisStageMap.at("context").asString());
 		stage.setFont(thisStageMap.at("font").asString());
+		stage.setFontSize(thisStageMap.at("fontsize").asInt());
 		if (hasButton)
 		{
 			int buttonNum = thisStageMap.at("buttonnum").asInt();
@@ -56,6 +58,7 @@ void GameCore::init()
 				buttons[i].setContext(thisStageMap.at("button" + std::to_string(i) + "context").asString());
 				buttons[i].setFont(thisStageMap.at("button" + std::to_string(i) + "font").asString());
 				buttons[i].setNextId(thisStageMap.at("button" + std::to_string(i) + "nextid").asInt());
+				buttons[i].setFontSize(thisStageMap.at("button" + std::to_string(i) + "fontsize").asInt());
 			}
 			stage.setButtonNum(buttonNum);
 			stage.setButtons(buttons);
@@ -77,17 +80,24 @@ GameCore::~GameCore()
 	delete instance;
 }
 
-Stage GameCore::getCurrentStage()
-{
-	return currentStage;
-}
 
 void GameCore::nextStage()
 {
-	currentId = currentStage.getNextId();
-	if (currentId == -1)
+	StatusManager::getInstance()->setCurrentId(StatusManager::getInstance()->getCurrentStage()->getNextId());
+	loadStage();
+}
+
+void GameCore::nextStage(int id)
+{
+	StatusManager::getInstance()->setCurrentId(id);
+	loadStage();
+}
+
+void GameCore::loadStage()
+{
+	if (StatusManager::getInstance()->getCurrentId() == -1)
 	{
-		//exit
+		//游戏结束
 		Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -97,16 +107,18 @@ void GameCore::nextStage()
 	}
 	else
 	{
-		currentStage = stageMap.at(currentId);
-		auto scene = GameScene::createScene(currentStage.getContext());
+		StatusManager::getInstance()->setCurrentStage(&stageMap.at(StatusManager::getInstance()->getCurrentId()));
+		//auto scene = GameScene::createScene(StatusManager::getInstance()->getCurrentStage());
+		auto scene = GameScene::createScene();
 		Director::getInstance()->replaceScene(scene);
 	}
 }
 
 void GameCore::run()
 {
-	currentId = 0;
-	currentStage = stageMap.at(currentId);
-	auto scene = GameScene::createScene(currentStage.getContext());
+	StatusManager::getInstance()->setCurrentId(0);
+	StatusManager::getInstance()->setCurrentStage(&stageMap.at(StatusManager::getInstance()->getCurrentId()));
+	//auto scene = GameScene::createScene(StatusManager::getInstance()->getCurrentStage());
+	auto scene = GameScene::createScene();
 	Director::getInstance()->runWithScene(scene);
 }

@@ -20,6 +20,7 @@ public:
 	void setBg(std::string s);
 	void setConversationBg(std::string s);
 	void setVoice(std::string s);
+	void setFontSize(int sz);
 
 	int getNextId();
 	std::string getContext();
@@ -31,16 +32,18 @@ public:
 	std::string getBg();
 	std::string getConversationBg();
 	std::string getVoice();
+	int getFontSize();
 private:	
 	int nextId;
 	std::string context;
 	std::string font="";
+	int fontSize=24;
 	bool hasBtn;
 	int buttonNum;
 	Button* buttons;
 	std::string bgm = "";
 	std::string bg = "";
-	std::string conversationbg = "";
+	std::string conversationBg = "";
 	std::string voice = "";
 };
 

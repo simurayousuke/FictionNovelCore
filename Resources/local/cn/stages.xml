@@ -8,13 +8,15 @@
         <key>context</key>
         <string>MainTitle</string>
 		<key>font</key>
-		<string></string>
+		<string>Marker Felt.ttf</string>
+		<key>fontsize</key>
+		<string>24</string>
 		<key>hasbutton</key>
 		<string>false</string>
 		<key>bgm</key>
 		<string></string>
 		<key>bg</key>
-		<string></string>
+		<string>kiminonaha.png</string>
 		<key>conversationbg</key>
 		<string></string>
 		<key>voice</key>
@@ -28,7 +30,9 @@
         <key>context</key>
         <string>Goodbye</string>
 		<key>font</key>
-		<string></string>
+		<string>Marker Felt.ttf</string>
+		<key>fontsize</key>
+		<string>24</string>
 		<key>hasbutton</key>
 		<string>true</string>
 		<key>buttonnum</key>
@@ -36,19 +40,23 @@
 		<key>button0context</key>
 		<string>back to 1</string>
 		<key>button0font</key>
-		<string></string>
+		<string>Marker Felt.ttf</string>
+		<key>button0fontsize</key>
+		<string>24</string>
 		<key>button0nextid</key>
 		<string>0</string>
 		<key>button1context</key>
 		<string>exit</string>
 		<key>button1font</key>
-		<string></string>
+		<string>Marker Felt.ttf</string>
+		<key>button1fontsize</key>
+		<string>24</string>
 		<key>button1nextid</key>
 		<string>-1</string>
 		<key>bgm</key>
 		<string></string>
 		<key>bg</key>
-		<string></string>
+		<string>kiminonaha.png</string>
 		<key>conversationbg</key>
 		<string></string>
 		<key>voice</key>

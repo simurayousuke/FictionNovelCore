@@ -36,7 +36,15 @@
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>src\scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Button.cpp" />
+    <ClCompile Include="..\Classes\Button.cpp">
+      <Filter>src\common</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Config.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StatusManager.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -57,7 +65,15 @@
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>src\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Button.h" />
+    <ClInclude Include="..\Classes\Button.h">
+      <Filter>src\common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Config.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StatusManager.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

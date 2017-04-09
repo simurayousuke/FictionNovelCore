@@ -99,7 +99,7 @@ void MainTitleScene::menuCloseCallback(Ref* pSender)
 		//EventCustom customEndEvent("game_scene_close_event");
 		//_eventDispatcher->dispatchEvent(&customEndEvent);
 
-	auto scene = GameScene::createScene("Goodbye~");
-	Director::getInstance()->replaceScene(scene);
+	//auto scene = GameScene::createScene(Stage);
+	//Director::getInstance()->replaceScene(scene);
 
 }
