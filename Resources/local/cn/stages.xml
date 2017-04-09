@@ -6,19 +6,19 @@
         <key>id</key>
         <string>0</string>
         <key>context</key>
-        <string>MainTitle</string>
+        <string>That was a nice day...</string>
 		<key>font</key>
 		<string>Marker Felt.ttf</string>
 		<key>fontsize</key>
-		<string>24</string>
+		<string>32</string>
 		<key>hasbutton</key>
 		<string>false</string>
 		<key>bgm</key>
 		<string></string>
 		<key>bg</key>
-		<string>kiminonaha.png</string>
+		<string>kiminonaha.jpg</string>
 		<key>conversationbg</key>
-		<string></string>
+		<string>conversationBg.png</string>
 		<key>voice</key>
 		<string></string>
 		<key>nextid</key>
@@ -28,17 +28,17 @@
         <key>id</key>
         <string>1</string>
         <key>context</key>
-        <string>Goodbye</string>
+        <string>What do you want to do?</string>
 		<key>font</key>
 		<string>Marker Felt.ttf</string>
 		<key>fontsize</key>
-		<string>24</string>
+		<string>32</string>
 		<key>hasbutton</key>
 		<string>true</string>
 		<key>buttonnum</key>
 		<string>2</string>
 		<key>button0context</key>
-		<string>back to 1</string>
+		<string>Tell me something about that day</string>
 		<key>button0font</key>
 		<string>Marker Felt.ttf</string>
 		<key>button0fontsize</key>
@@ -46,7 +46,7 @@
 		<key>button0nextid</key>
 		<string>0</string>
 		<key>button1context</key>
-		<string>exit</string>
+		<string>Goodbye</string>
 		<key>button1font</key>
 		<string>Marker Felt.ttf</string>
 		<key>button1fontsize</key>
@@ -56,9 +56,9 @@
 		<key>bgm</key>
 		<string></string>
 		<key>bg</key>
-		<string>kiminonaha.png</string>
+		<string>kiminonaha.jpg</string>
 		<key>conversationbg</key>
-		<string></string>
+		<string>conversationBg.png</string>
 		<key>voice</key>
 		<string></string>
     </dict>
