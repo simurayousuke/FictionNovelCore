@@ -1,0 +1,60 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+ 
+<plist version="1.0">
+ <array>
+    <dict>
+        <key>id</key>
+        <string>0</string>
+        <key>context</key>
+        <string>MainTitle</string>
+		<key>font</key>
+		<string></string>
+		<key>hasbutton</key>
+		<string>false</string>
+		<key>bgm</key>
+		<string></string>
+		<key>bg</key>
+		<string></string>
+		<key>conversationbg</key>
+		<string></string>
+		<key>voice</key>
+		<string></string>
+		<key>nextid</key>
+		<string>1</string>
+    </dict>
+    <dict>
+        <key>id</key>
+        <string>1</string>
+        <key>context</key>
+        <string>Goodbye</string>
+		<key>font</key>
+		<string></string>
+		<key>hasbutton</key>
+		<string>true</string>
+		<key>buttonnum</key>
+		<string>2</string>
+		<key>button0context</key>
+		<string>back to 1</string>
+		<key>button0font</key>
+		<string></string>
+		<key>button0nextid</key>
+		<string>0</string>
+		<key>button1context</key>
+		<string>exit</string>
+		<key>button1font</key>
+		<string></string>
+		<key>button1nextid</key>
+		<string>-1</string>
+		<key>bgm</key>
+		<string></string>
+		<key>bg</key>
+		<string></string>
+		<key>conversationbg</key>
+		<string></string>
+		<key>voice</key>
+		<string></string>
+		<key>nextid</key>
+		<string>-1</string>
+    </dict>
+</array>
+</plist>

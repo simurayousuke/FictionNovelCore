@@ -1,0 +1,22 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+ 
+<plist version="1.0">
+ <array>
+    <dict>
+        <key>id</key>
+        <string>0</string>
+        <key>context</key>
+        <string>MainTitle</string>
+		<key>nextid</key>
+		<string>1</string>
+    </dict>
+    <dict>
+        <key>id</key>
+        <string>1</string>
+        <key>context</key>
+        <string>Goodbye</string>
+		<key>nextid</key>
+		<string>-1</string>
+    </dict>
+</array>
+</plist>

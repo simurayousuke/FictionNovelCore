@@ -1,0 +1,11 @@
+del /f/s/q .\Release.win32\*.obj
+del /f/s/q .\Release.win32\*.lib
+del /f/s/q .\Release.win32\*.exp
+del /f/s/q .\Release.win32\*.iobj
+del /f/s/q .\Release.win32\*.ipdb
+del /f/s/q .\Release.win32\*.log
+del /f/s/q .\Release.win32\*.pdb
+del /f/s/q .\Release.win32\*.cache
+del /f/s/q .\Release.win32\*.res
+rd /s/q .\Release.win32\FictionNovelCore.tlog
+rd /s/q .\Release.win32\res
