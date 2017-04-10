@@ -85,7 +85,7 @@ bool GameScene::init()
 		auto cv = StatusManager::getInstance()->getCurrentVoice();
 		if (cv != 0)
 			SimpleAudioEngine::getInstance()->stopEffect(cv);
-		StatusManager::getInstance()->setCurrentVoice(SimpleAudioEngine::getInstance()->playEffect(("sounds/voice/" + stage->getVoice()).c_str(), false));
+		StatusManager::getInstance()->setCurrentVoice(SimpleAudioEngine::getInstance()->playEffect(("sounds/voice/" + Config::getInstance()->getVoiceLanguage()+"/"+ stage->getVoice()).c_str(), false));
 	}
 
 	auto conversationBgPath = stage->getConversationBg();

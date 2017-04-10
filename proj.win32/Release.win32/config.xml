@@ -8,7 +8,9 @@
         <key>supportlanguage</key>
         <string>en,cn,jp</string>
 		<key>defaultlanguage</key>
-		<string>jp</string>
+		<string>cn</string>
+		<key>defaultvoicelanguage</key>
+		<string>cn</string>
     </dict>   
 </array>	
 </plist>

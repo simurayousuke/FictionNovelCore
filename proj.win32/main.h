@@ -11,3 +11,6 @@
 #include "platform/CCStdC.h"
 
 #endif    // __MAIN_H__
+
+// msvcp140.dll
+// vcruntime140.dll

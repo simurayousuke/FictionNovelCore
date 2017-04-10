@@ -103,6 +103,7 @@ void GameCore::preloadConfig()
 	Config::getInstance()->setSupportLanguage(supportLanguages);
 	Config::getInstance()->setLocalLanguage(configMap.at("defaultlanguage").asString());
 	Config::getInstance()->setGameName(configMap.at("gamename").asString());
+	Config::getInstance()->setVoiceLanguage(configMap.at("defaultvoicelanguage").asString());
 }
 
 void GameCore::preloadMainTitle()

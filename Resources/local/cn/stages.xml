@@ -68,7 +68,7 @@
 		<key>conversationbg</key>
 		<string>conversationBg.png</string>
 		<key>voice</key>
-		<string></string>
+		<string>test.wav</string>
     </dict>
 	<dict>
         <key>id</key>
