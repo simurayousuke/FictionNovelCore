@@ -194,21 +194,3 @@ bool GameScene::init()
 	stage = NULL;
 	return true;
 }
-/*
-bool TDInvFileUtils::saveFile(char *pContent, string pFileName) {
-	//第一获取储存的文件路径  
-	string path = CCFileUtils::sharedFileUtils()->getWriteablePath() + pFileName;
-	CCLOG("wanna save file path = %s", path.c_str());
-
-	//创建一个文件指针  
-	//路径、模式  
-	FILE* file = fopen(path.c_str(), "w");
-	if (file) {
-		fputs(pContent, file);
-		fclose(file);
-	}
-	else
-		CCLOG("save file error.");
-
-	return false;
-}*/
