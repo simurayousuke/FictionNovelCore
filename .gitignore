@@ -13,8 +13,8 @@
 *.userprefs
 
 # Build results
-[Dd]ebug.win32/*
-[Rr]elease.win32/*
+[Dd]ebug.win32/
+[Rr]elease.win32/
 .vs/*
 [Dd]ebug/
 [Dd]ebugPublic/
