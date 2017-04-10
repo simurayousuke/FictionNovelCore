@@ -3,6 +3,10 @@
 
 #include "cocos2d.h"
 #include "GameScene.h"
+#include "sqlite3/include/sqlite3.h"
+#include "SimpleAudioEngine.h"
+
+#pragma comment(lib, "F:/cocos/FictionNovelCore/cocos2d/external/sqlite3/libraries/win32/sqlite3.lib")
 
 class StatusManager
 {
@@ -19,8 +23,8 @@ public:
 	void setCurrentId(int id);
 	void setCurrentBgm(std::string bgm);//////////////
 	void setCurrentVoice(unsigned int voice);
-	//void save();
-	//void load();
+	void save();
+	void load();
 private:
 	StatusManager();
 	//GameScene* gameScene;

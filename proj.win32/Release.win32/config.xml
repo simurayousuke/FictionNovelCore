@@ -6,9 +6,9 @@
         <key>gamename</key>
         <string>TestGame</string>
         <key>supportlanguage</key>
-        <string>en,cn</string>
+        <string>en,cn,jp</string>
 		<key>defaultlanguage</key>
-		<string>en</string>
+		<string>jp</string>
     </dict>   
 </array>	
 </plist>

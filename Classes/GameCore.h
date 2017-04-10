@@ -8,6 +8,7 @@
 #include <map>
 #include "SimpleAudioEngine.h"
 #include "MainTitleScene.h"
+#include "SettingsScene.h"
 
 class GameCore
 {
@@ -19,6 +20,7 @@ public:
 	void run();
 	void end();
 	void reload();
+	void settings();
 	~GameCore();
 private:
 	static GameCore* instance;
@@ -26,6 +28,9 @@ private:
 	void preloadMainTitle();
 	void preloadStages();
 	void preloadConfig();
+	void preloadSettingsScene();
+	void preloadLoadScene();
+	void preloadAboutScene();
 	GameCore();
 	std::map<int, Stage> stageMap;
 };

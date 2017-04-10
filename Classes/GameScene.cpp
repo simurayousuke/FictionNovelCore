@@ -9,6 +9,8 @@ Stage* GameScene::stage = NULL;
 int* GameScene::nextId = NULL;
 cocos2d::Rect* GameScene::buttonRect = NULL;
 cocos2d::Rect GameScene::textRect = cocos2d::Rect();
+cocos2d::Rect GameScene::saveRect = cocos2d::Rect();
+cocos2d::Rect GameScene::backRect = cocos2d::Rect();
 
 Scene* GameScene::createScene()
 {
@@ -97,6 +99,24 @@ bool GameScene::init()
 	this->addChild(conversationBg, 1);
 	textRect = conversationBg->getBoundingBox();
 
+	auto labelBack = Label::createWithTTF("quit", "fonts/" + Local::getDefaultFont(), 24);
+	labelBack->setPosition(Vec2(origin.x + visibleSize.width - labelBack->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelBack->getContentSize().height / 2 - 30));
+	this->addChild(labelBack, 2);
+	auto backBg = Sprite::create("assets/conversationBg.png");
+	backBg->setPosition(Vec2(origin.x + visibleSize.width - labelBack->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelBack->getContentSize().height / 2 - 30));
+	backBg->setScale((labelBack->getContentSize().width + 50) / backBg->getContentSize().width, (labelBack->getContentSize().height + 20) / backBg->getContentSize().height);
+	this->addChild(backBg, 1);
+	backRect = backBg->getBoundingBox();
+
+	auto labelSave = Label::createWithTTF("save", "fonts/" + Local::getDefaultFont(), 24);
+	labelSave->setPosition(Vec2(backRect.getMinX() - labelSave->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelSave->getContentSize().height / 2 - 30));
+	this->addChild(labelSave, 2);
+	auto saveBg = Sprite::create("assets/conversationBg.png");
+	saveBg->setPosition(Vec2(backRect.getMinX() - labelSave->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelSave->getContentSize().height / 2 - 30));
+	saveBg->setScale((labelSave->getContentSize().width + 50) / saveBg->getContentSize().width, (labelSave->getContentSize().height + 20) / saveBg->getContentSize().height);
+	this->addChild(saveBg, 1);
+	saveRect = saveBg->getBoundingBox();
+
 	if (stage->hasButton())
 	{
 		buttonNum = stage->getButtonNum();
@@ -155,6 +175,10 @@ bool GameScene::init()
 						GameCore::getInstance()->nextStage(nextId[i]);
 			if (textRect.containsPoint(position)&&!StatusManager::getInstance()->getCurrentStage()->hasButton())
 				GameCore::getInstance()->nextStage();
+			if (saveRect.containsPoint(position))
+				StatusManager::getInstance()->save();
+			if (backRect.containsPoint(position))
+				GameCore::getInstance()->nextStage(-1);
 		}
 	};
 
@@ -170,4 +194,21 @@ bool GameScene::init()
 	stage = NULL;
 	return true;
 }
+/*
+bool TDInvFileUtils::saveFile(char *pContent, string pFileName) {
+	//第一获取储存的文件路径  
+	string path = CCFileUtils::sharedFileUtils()->getWriteablePath() + pFileName;
+	CCLOG("wanna save file path = %s", path.c_str());
 
+	//创建一个文件指针  
+	//路径、模式  
+	FILE* file = fopen(path.c_str(), "w");
+	if (file) {
+		fputs(pContent, file);
+		fclose(file);
+	}
+	else
+		CCLOG("save file error.");
+
+	return false;
+}*/

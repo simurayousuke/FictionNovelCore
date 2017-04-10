@@ -1,5 +1,5 @@
-#ifndef  _CONFIG_H_
-#define  _CONFIG_H_
+#ifndef  __CONFIG_H__
+#define  __CONFIG_H__
 
 #include "cocos2d.h"
 #include <vector>
@@ -27,5 +27,5 @@ private:
 	std::vector<std::string>* supportLanguage;
 	std::string gameName = "game";
 };
-#endif // _CONFIG_H_
+#endif // __CONFIG_H__
 

@@ -23,5 +23,7 @@ private:
 	static int buttonNum;
 	static cocos2d::Rect* buttonRect;
 	static cocos2d::Rect textRect;
+	static cocos2d::Rect saveRect;
+	static cocos2d::Rect backRect;
 };
 #endif // __Game_SCENE_H__

@@ -4,27 +4,12 @@ USING_NS_CC;
 using namespace CocosDenshion;
 
 GameCore* GameCore::instance = NULL;
-//int GameCore::currentId = 0;
-//Stage GameCore::currentStage = Stage();
-//std::map<int, Stage> GameCore::stageMap = std::map<int, Stage>();
 
 GameCore::GameCore()
 {
 
 }
 
-/*
-GameCore::GameCore(const GameCore&)
-{
-
-}
-
-
-GameCore& GameCore::operator=(const GameCore&)
-{
-	return *(GameCore::getInstance());
-}
-*/
 GameCore* GameCore::getInstance()
 {
 	if (instance == NULL)
@@ -37,11 +22,11 @@ void GameCore::init()
 	//装载载入scene
 	//auto scene = MainTitleScene::createScene();
 	//Director::getInstance()->runWithScene(scene);
+
 	preloadConfig();
 	preloadMainTitle();
 	preloadStages();
-	//启动游戏
-	//run();
+
 	auto scene = MainTitleScene::createScene();
 	Director::getInstance()->runWithScene(scene);
 }
@@ -186,4 +171,28 @@ void GameCore::reload()
 {
 	preloadMainTitle();
 	preloadStages();
+	preloadSettingsScene();
+	preloadLoadScene();
+	preloadAboutScene();
+}
+
+void GameCore::preloadSettingsScene()
+{
+
+}
+
+void GameCore::preloadLoadScene()
+{
+
+}
+
+void GameCore::preloadAboutScene()
+{
+
+}
+
+void GameCore::settings()
+{
+	auto scene = SettingsScene::createScene();
+	Director::getInstance()->replaceScene(scene);
 }
