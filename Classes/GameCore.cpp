@@ -38,7 +38,7 @@ void GameCore::init()
 	//auto scene = MainTitleScene::createScene();
 	//Director::getInstance()->runWithScene(scene);
 
-	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("local/cn/stages.xml");//读取xml文档,放入ValueVector中
+	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/stages.xml");//读取xml文档,放入ValueVector中
 
 	for (auto& e : txt_vec)
 	{
@@ -78,7 +78,7 @@ void GameCore::init()
 		auto voice = thisStageMap.at("voice").asString();
 		stage.setVoice(voice);
 		if (voice != "")
-			SimpleAudioEngine::getInstance()->preloadEffect(("sounds/voice/" + voice).c_str());//wav,mid
+			SimpleAudioEngine::getInstance()->preloadEffect(("sounds/voice/" + Config::getInstance()->getVoiceLanguage() + "/" + voice).c_str());//wav,mid
 
 		stageMap[thisStageMap.at("id").asInt()] = stage;
 	}
