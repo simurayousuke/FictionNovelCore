@@ -6,7 +6,21 @@
         <key>id</key>
         <string>0</string>
         <key>context</key>
-        <string>MainTitle</string>
+        <string>Rain: That was a nice day.</string>
+		<key>font</key>
+		<string>Marker Felt.ttf</string>
+		<key>fontsize</key>
+		<string>40</string>
+		<key>hasbutton</key>
+		<string>false</string>
+		<key>bgm</key>
+		<string>night5.mp3</string>
+		<key>bg</key>
+		<string>kiminonaha.jpg</string>
+		<key>conversationbg</key>
+		<string>conversationBg.png</string>
+		<key>voice</key>
+		<string></string>
 		<key>nextid</key>
 		<string>1</string>
     </dict>
@@ -14,9 +28,109 @@
         <key>id</key>
         <string>1</string>
         <key>context</key>
-        <string>Goodbye</string>
+        <string>Rain: What do you want to do?</string>
+		<key>font</key>
+		<string>Marker Felt.ttf</string>
+		<key>fontsize</key>
+		<string>60</string>
+		<key>hasbutton</key>
+		<string>true</string>
+		<key>buttonnum</key>
+		<string>3</string>
+		<key>button0context</key>
+		<string>Tell me something about that day</string>
+		<key>button0font</key>
+		<string>Marker Felt.ttf</string>
+		<key>button0fontsize</key>
+		<string>24</string>
+		<key>button0nextid</key>
+		<string>0</string>
+		<key>button1context</key>
+		<string>Kiss</string>
+		<key>button1font</key>
+		<string>Marker Felt.ttf</string>
+		<key>button1fontsize</key>
+		<string>24</string>
+		<key>button1nextid</key>
+		<string>3</string>
+		<key>button2context</key>
+		<string>Goodbye</string>
+		<key>button2font</key>
+		<string>Marker Felt.ttf</string>
+		<key>button2fontsize</key>
+		<string>24</string>
+		<key>button2nextid</key>
+		<string>2</string>
+		<key>bgm</key>
+		<string>night5.mp3</string>
+		<key>bg</key>
+		<string>kiminonaha.jpg</string>
+		<key>conversationbg</key>
+		<string>conversationBg.png</string>
+		<key>voice</key>
+		<string></string>
+    </dict>
+	<dict>
+        <key>id</key>
+        <string>2</string>
+        <key>context</key>
+        <string>Rain: You doesn't care me at all!</string>
+		<key>font</key>
+		<string>Marker Felt.ttf</string>
+		<key>fontsize</key>
+		<string>32</string>
+		<key>hasbutton</key>
+		<string>true</string>
+		<key>buttonnum</key>
+		<string>1</string>
+		<key>button0context</key>
+		<string>Game over</string>
+		<key>button0font</key>
+		<string>Marker Felt.ttf</string>
+		<key>button0fontsize</key>
+		<string>40</string>
+		<key>button0nextid</key>
+		<string>-1</string>
+		<key>bgm</key>
+		<string>stop</string>
+		<key>bg</key>
+		<string>kiminonaha.jpg</string>
+		<key>conversationbg</key>
+		<string>conversationBg.png</string>
+		<key>voice</key>
+		<string></string>
 		<key>nextid</key>
 		<string>-1</string>
+    </dict>
+	<dict>
+        <key>id</key>
+        <string>3</string>
+        <key>context</key>
+        <string>Rain: I hate you!</string>
+		<key>font</key>
+		<string>Marker Felt.ttf</string>
+		<key>fontsize</key>
+		<string>32</string>
+		<key>hasbutton</key>
+		<string>true</string>
+		<key>buttonnum</key>
+		<string>1</string>
+		<key>button0context</key>
+		<string>Game over</string>
+		<key>button0font</key>
+		<string>Marker Felt.ttf</string>
+		<key>button0fontsize</key>
+		<string>40</string>
+		<key>button0nextid</key>
+		<string>-1</string>
+		<key>bgm</key>
+		<string>stop</string>
+		<key>bg</key>
+		<string>kiminonaha.jpg</string>
+		<key>conversationbg</key>
+		<string>conversationBg.png</string>
+		<key>voice</key>
+		<string></string>
     </dict>
 </array>
 </plist>

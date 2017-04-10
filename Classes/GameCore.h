@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "StatusManager.h"
 #include <map>
+#include "SimpleAudioEngine.h"
 
 class GameCore
 {
@@ -15,6 +16,9 @@ public:
 	void nextStage(int id);
 	void init();
 	void run();
+	//void playBgm(std::string bgm);
+	//void stopBgm();
+	//void playVoice(std::string voice);
 	~GameCore();
 private:
 	static GameCore* instance;

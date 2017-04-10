@@ -1,10 +1,14 @@
 #include "GameScene.h"
-#include "SimpleAudioEngine.h"
+
 
 USING_NS_CC;
+using namespace CocosDenshion;
 
-std::string GameScene::titleStr = "";
+int GameScene::buttonNum = 0;
 Stage* GameScene::stage = NULL;
+int* GameScene::nextId = NULL;
+cocos2d::Rect* GameScene::buttonRect = NULL;
+cocos2d::Rect GameScene::textRect = cocos2d::Rect();
 
 Scene* GameScene::createScene()
 {
@@ -33,21 +37,12 @@ bool GameScene::init()
 		return false;
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
-
-	auto closeItem = MenuItemImage::create("assets/CloseNormal.png", "assets/CloseSelected.png", CC_CALLBACK_1(GameScene::menuCloseCallback, this));
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2, origin.y + closeItem->getContentSize().height / 2));
-	auto menu = Menu::create(closeItem, NULL);
-	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 1);
-
-
 	if (stage == NULL)
 		stage = StatusManager::getInstance()->getCurrentStage();
 
 	auto label = Label::createWithTTF(stage->getContext(), "fonts/" + stage->getFont(), stage->getFontSize());
-	label->setPosition(Vec2(origin.x + label->getContentSize().width / 2 + 50, origin.y + Config::conversationHeight));
-	//label->setDimensions(visibleSize.width-50, Config::conversationHeight);
+	label->setDimensions(visibleSize.width - 50, Config::conversationHeight);
+	label->setPosition(Vec2(origin.x + label->getContentSize().width / 2 + 50, origin.y + label->getContentSize().height / 2));
 	this->addChild(label, 2);
 
 	auto bg = Sprite::create("assets/" + stage->getBg());
@@ -57,13 +52,23 @@ bool GameScene::init()
 	this->addChild(bg, 0);
 
 	if (stage->getBgm() != "")
-	{
-
-	}
+		if (stage->getBgm() == "stop")
+		{
+			SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+			StatusManager::getInstance()->setCurrentBgm("stop");
+		}
+		else if( StatusManager::getInstance()->getCurrentBgm()!= stage->getBgm())
+		{
+			SimpleAudioEngine::getInstance()->playBackgroundMusic(("sounds/bgm/" + stage->getBgm()).c_str(), false);
+			StatusManager::getInstance()->setCurrentBgm(stage->getBgm());
+		}
 
 	if (stage->getVoice() != "")
 	{
-
+		auto cv = StatusManager::getInstance()->getCurrentVoice();
+		if (cv != 0)
+			SimpleAudioEngine::getInstance()->stopEffect(cv);
+		StatusManager::getInstance()->setCurrentVoice(SimpleAudioEngine::getInstance()->playEffect(("sounds/voice/" + stage->getVoice()).c_str(), false));
 	}
 
 	auto conversationBgPath = stage->getConversationBg();
@@ -75,21 +80,77 @@ bool GameScene::init()
 	conversationBg->setScale((visibleSize.width - 20) / conversationBg->getContentSize().width, Config::conversationHeight / conversationBg->getContentSize().height);
 	conversationBg->setOpacity(200);
 	this->addChild(conversationBg, 1);
+	textRect = conversationBg->getBoundingBox();
 
 	if (stage->hasButton())
 	{
-		int buttonNum = stage->getButtonNum();
+		buttonNum = stage->getButtonNum();
 		Button* buttons = stage->getButtons();
+		buttonRect = new Rect[buttonNum];
+		nextId = new int[buttonNum];
 		for (int i = 0; i < buttonNum; ++i)
 		{
 			//建立button
-			auto buttonItem = MenuItemFont::create(buttons[i].getContext(), CC_CALLBACK_1(GameScene::buttonClickCallback, this, buttons[i].getNextId()));
+			auto buttonItem = Label::createWithTTF(buttons[i].getContext(), "fonts/" + buttons[i].getFont(), buttons[i].getFontSize());
+			//buttonItem->setDimensions(visibleSize.width - 50, Config::conversationHeight);
 			buttonItem->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - (visibleSize.height - Config::conversationHeight - visibleSize.height*0.2) / buttonNum*(i + 1)));
-			auto buttonMenu = Menu::create(buttonItem, NULL);
-			buttonMenu->setPosition(Vec2::ZERO);
-			this->addChild(buttonMenu, 1);
+			this->addChild(buttonItem, 2);
+
+			auto buttonBg = Sprite::create("assets/conversationBg.png");
+			buttonBg->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height - (visibleSize.height - Config::conversationHeight - visibleSize.height*0.2) / buttonNum*(i + 1)));
+			buttonBg->setScale((buttonItem->getContentSize().width + 50) / buttonBg->getContentSize().width, (buttonItem->getContentSize().height + 20) / buttonBg->getContentSize().height);
+			this->addChild(buttonBg, 1);
+
+			nextId[i] = buttons[i].getNextId();
+			buttonRect[i] = buttonBg->getBoundingBox();
 		}
 	}
+	auto myKeyListener = EventListenerKeyboard::create(); //创建事件监听器监听键盘事件
+														  //键盘按键按下时的响应
+	myKeyListener->onKeyPressed = [](EventKeyboard::KeyCode keycode, cocos2d::Event *event)
+	{
+		CCLOG("key is pressed, keycode is %d", keycode);
+	};
+
+	//键盘按键弹回时的响应
+	myKeyListener->onKeyReleased = [](EventKeyboard::KeyCode keycode, cocos2d::Event *event)
+	{
+		CCLOG("key is released, keycode is %d", keycode);
+	};
+
+	auto myMouseListener = EventListenerMouse::create();//创建事件监听器鼠标事件
+														//鼠标移动
+	myMouseListener->onMouseMove = [=](Event *event)
+	{
+		//EventMouse* e = (EventMouse*)event;
+		//this->mouse->setPosition(e->getCursorX(), e->getCursorY() + visibleSize.height);
+	};
+
+	myMouseListener->onMouseDown = [=](Event *event)
+	{
+		//this->mouse->setScale(0.2f); //鼠标按键按下，屏幕上的“箭头”尺寸缩小
+		EventMouse* e = (EventMouse*)event;
+		Vec2 position = e->getLocationInView();
+
+		if (e->getMouseButton() == 0)//L0,R1
+		{
+			if (StatusManager::getInstance()->getCurrentStage()->hasButton())
+				for (int i = 0; i < buttonNum; ++i)
+					if (buttonRect[i].containsPoint(position))
+						GameCore::getInstance()->nextStage(nextId[i]);
+			if (textRect.containsPoint(position)&&!StatusManager::getInstance()->getCurrentStage()->hasButton())
+				GameCore::getInstance()->nextStage();
+		}
+	};
+
+	myMouseListener->onMouseUp = [=](Event *event)
+	{
+		//this->mouse->setScale(0.3f); //鼠标按键抬起，屏幕上的“箭头”尺寸放大
+	};
+
+	//将事件监听器与场景绑定
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(myKeyListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(myMouseListener, this);
 
 	stage = NULL;
 	return true;

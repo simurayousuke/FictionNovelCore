@@ -23,9 +23,11 @@ public:
     CREATE_FUNC(GameScene);
 
 private:
-	static std::string titleStr;
 	static Stage* stage;
-	
+	static int* nextId;
+	static int buttonNum;
+	static cocos2d::Rect* buttonRect;
+	static cocos2d::Rect textRect;
 };
 
 

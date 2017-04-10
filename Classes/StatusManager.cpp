@@ -9,16 +9,6 @@ StatusManager* StatusManager::getInstance()
 }
 StatusManager::StatusManager() {}
 StatusManager::~StatusManager() {}
-/*
-void StatusManager::setGameScene(GameScene *gs)
-{
-	gameScene = gs;
-}
-GameScene* StatusManager::getGameScene()
-{
-	return gameScene;
-}
-*/
 
 Stage* StatusManager::getCurrentStage()
 {
@@ -28,6 +18,15 @@ int StatusManager::getCurrentId()
 {
 	return currentId;
 }
+std::string StatusManager::getCurrentBgm()
+{
+	return currentBgm;
+}
+unsigned int StatusManager::getCurrentVoice()
+{
+	return currentVoice;
+}
+
 void StatusManager::setCurrentStage(Stage* stg)
 {
 	currentStage = stg;
@@ -35,4 +34,12 @@ void StatusManager::setCurrentStage(Stage* stg)
 void StatusManager::setCurrentId(int id)
 {
 	currentId = id;
+}
+void StatusManager::setCurrentBgm(std::string bgm)
+{
+	currentBgm = bgm;
+}
+void StatusManager::setCurrentVoice(unsigned int voice)
+{
+	currentVoice = voice;
 }

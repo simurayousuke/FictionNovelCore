@@ -1,6 +1,7 @@
 #include "GameCore.h"
 
 USING_NS_CC;
+using namespace CocosDenshion;
 
 GameCore* GameCore::instance = NULL;
 //int GameCore::currentId = 0;
@@ -38,7 +39,7 @@ void GameCore::init()
 	//Director::getInstance()->runWithScene(scene);
 
 	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("local/cn/stages.xml");//读取xml文档,放入ValueVector中
-																							
+
 	for (auto& e : txt_vec)
 	{
 		Stage stage;
@@ -65,10 +66,20 @@ void GameCore::init()
 		}
 		else
 			stage.setNextId(thisStageMap.at("nextid").asInt());
-		stage.setBgm(thisStageMap.at("bgm").asString());
+
+		auto bgm = thisStageMap.at("bgm").asString();
+		stage.setBgm(bgm);
+		if (bgm != "")
+			SimpleAudioEngine::getInstance()->preloadBackgroundMusic(("sounds/bgm/" + bgm).c_str());//wav,mp3,mid
+
 		stage.setBg(thisStageMap.at("bg").asString());
 		stage.setConversationBg(thisStageMap.at("conversationbg").asString());
-		stage.setVoice(thisStageMap.at("voice").asString());
+
+		auto voice = thisStageMap.at("voice").asString();
+		stage.setVoice(voice);
+		if (voice != "")
+			SimpleAudioEngine::getInstance()->preloadEffect(("sounds/voice/" + voice).c_str());//wav,mid
+
 		stageMap[thisStageMap.at("id").asInt()] = stage;
 	}
 	run();
@@ -98,6 +109,7 @@ void GameCore::loadStage()
 	if (StatusManager::getInstance()->getCurrentId() == -1)
 	{
 		//游戏结束
+
 		Director::getInstance()->end();
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
@@ -122,3 +134,22 @@ void GameCore::run()
 	auto scene = GameScene::createScene();
 	Director::getInstance()->runWithScene(scene);
 }
+/*
+void GameCore::playBgm(std::string bgm)
+{
+	if (bgm != StatusManager::getInstance()->getCurrentBgm())
+		SimpleAudioEngine::getInstance()->playBackgroundMusic(("sounds/bgm/" + bgm).c_str(), false);
+}
+void GameCore::playVoice(std::string voice)
+{
+	//SimpleAudioEngine::getInstance()->stopAllEffects();
+	auto cv = StatusManager::getInstance()->getCurrentVoice();
+	if (cv != 0)
+		SimpleAudioEngine::getInstance()->stopEffect(cv);
+	StatusManager::getInstance()->setCurrentVoice(SimpleAudioEngine::getInstance()->playEffect(("sounds/voice/" +voice).c_str(), false));
+}
+void GameCore::stopBgm()
+{
+	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+}
+*/
