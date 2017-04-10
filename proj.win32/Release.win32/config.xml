@@ -1,0 +1,14 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!--?config version="1.0"-->
+<plist version="1.0">
+<array>
+    <dict>
+        <key>gamename</key>
+        <string>TestGame</string>
+        <key>supportlanguage</key>
+        <string>en,cn</string>
+		<key>defaultlanguage</key>
+		<string>en</string>
+    </dict>   
+</array>	
+</plist>

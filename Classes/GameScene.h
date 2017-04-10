@@ -10,15 +10,10 @@ class GameScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
-	//static cocos2d::Scene* createScene(std::string titleString);
 	static cocos2d::Scene* createScene(Stage* stg);
 
-    virtual bool init();
-    
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-	void buttonClickCallback(cocos2d::Ref* pSender,int id);
-    
+    virtual bool init();  
+
     // implement the "static create()" method manually
     CREATE_FUNC(GameScene);
 
@@ -29,7 +24,4 @@ private:
 	static cocos2d::Rect* buttonRect;
 	static cocos2d::Rect textRect;
 };
-
-
-
 #endif // __Game_SCENE_H__

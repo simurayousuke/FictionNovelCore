@@ -74,7 +74,7 @@ void Stage::setFontSize(int sz)
 
 std::string Stage::getFont()
 {
-	return font==""? "Marker Felt.ttf" : font;
+	return font==""? Local::getDefaultFont() : font;
 }
 bool Stage::hasButton()
 {

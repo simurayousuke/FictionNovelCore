@@ -2,7 +2,7 @@
 #define  _BUTTON_H_
 
 #include "cocos2d.h"
-
+#include "Local.h"
 
 class Button
 {

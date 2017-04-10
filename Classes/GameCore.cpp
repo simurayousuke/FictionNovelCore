@@ -37,9 +37,108 @@ void GameCore::init()
 	//装载载入scene
 	//auto scene = MainTitleScene::createScene();
 	//Director::getInstance()->runWithScene(scene);
+	preloadConfig();
+	preloadMainTitle();
+	preloadStages();
+	//启动游戏
+	//run();
+	auto scene = MainTitleScene::createScene();
+	Director::getInstance()->runWithScene(scene);
+}
 
-	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/stages.xml");//读取xml文档,放入ValueVector中
+GameCore::~GameCore()
+{
+	delete instance;
+}
 
+
+void GameCore::nextStage()
+{
+	StatusManager::getInstance()->setCurrentId(StatusManager::getInstance()->getCurrentStage()->getNextId());
+	loadStage();
+}
+
+void GameCore::nextStage(int id)
+{
+	StatusManager::getInstance()->setCurrentId(id);
+	loadStage();
+}
+
+void GameCore::loadStage()
+{
+	if (StatusManager::getInstance()->getCurrentId() == -1)
+	{
+		//游戏结束
+		auto scene = MainTitleScene::createScene();
+		Director::getInstance()->replaceScene(scene);
+	}
+	else
+	{
+		StatusManager::getInstance()->setCurrentStage(&stageMap.at(StatusManager::getInstance()->getCurrentId()));
+		auto scene = GameScene::createScene();
+		Director::getInstance()->replaceScene(scene);
+	}
+}
+
+void GameCore::run()
+{
+	StatusManager::getInstance()->setCurrentId(0);
+	StatusManager::getInstance()->setCurrentStage(&stageMap.at(StatusManager::getInstance()->getCurrentId()));
+	auto scene = GameScene::createScene();
+	Director::getInstance()->replaceScene(scene);
+}
+
+void GameCore::end()
+{
+	Director::getInstance()->end();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	exit(0);
+#endif
+}
+
+void GameCore::preloadConfig()
+{
+	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("config.xml");
+	auto configMap = configVec.at(0).asValueMap();
+	auto supportLanguage = configMap.at("supportlanguage").asString();
+	std::string::size_type pos;
+	std::vector<std::string>* supportLanguages = new std::vector<std::string>();
+	supportLanguage += ",";//扩展字符串以方便操作
+	int size = supportLanguage.size();
+	for (int i = 0; i<size; i++)
+	{
+		pos = supportLanguage.find(",", i);
+		if (pos<size)
+		{
+			std::string s = supportLanguage.substr(i, pos - i);
+			supportLanguages->push_back(s);
+			i = pos;
+		}
+	}
+	Config::getInstance()->setSupportLanguage(supportLanguages);
+	Config::getInstance()->setLocalLanguage(configMap.at("defaultlanguage").asString());
+	Config::getInstance()->setGameName(configMap.at("gamename").asString());
+}
+
+void GameCore::preloadMainTitle()
+{
+	ValueVector titleVec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/title.xml");
+	auto titleMap = titleVec.at(0).asValueMap();
+	MainTitleScene::titleContext = titleMap.at("titlecontext").asString();
+	MainTitleScene::titleBg = titleMap.at("titlebg").asString();
+	MainTitleScene::bgm = titleMap.at("titlebgm").asString();
+	MainTitleScene::titleFont = titleMap.at("titlefont").asString();
+	MainTitleScene::titleFontSize = titleMap.at("titlefontsize").asInt();
+	MainTitleScene::start = titleMap.at("start").asString();
+	MainTitleScene::load = titleMap.at("load").asString();
+	MainTitleScene::settings = titleMap.at("settings").asString();
+	MainTitleScene::exit = titleMap.at("exit").asString();
+	MainTitleScene::about = titleMap.at("about").asString();
+}
+
+void GameCore::preloadStages()
+{
+	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/stages.xml");//读取xml文档,放入ValueVector中	
 	for (auto& e : txt_vec)
 	{
 		Stage stage;
@@ -79,77 +178,12 @@ void GameCore::init()
 		stage.setVoice(voice);
 		if (voice != "")
 			SimpleAudioEngine::getInstance()->preloadEffect(("sounds/voice/" + Config::getInstance()->getVoiceLanguage() + "/" + voice).c_str());//wav,mid
-
 		stageMap[thisStageMap.at("id").asInt()] = stage;
 	}
-	run();
-
 }
 
-GameCore::~GameCore()
+void GameCore::reload()
 {
-	delete instance;
+	preloadMainTitle();
+	preloadStages();
 }
-
-
-void GameCore::nextStage()
-{
-	StatusManager::getInstance()->setCurrentId(StatusManager::getInstance()->getCurrentStage()->getNextId());
-	loadStage();
-}
-
-void GameCore::nextStage(int id)
-{
-	StatusManager::getInstance()->setCurrentId(id);
-	loadStage();
-}
-
-void GameCore::loadStage()
-{
-	if (StatusManager::getInstance()->getCurrentId() == -1)
-	{
-		//游戏结束
-
-		Director::getInstance()->end();
-
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		exit(0);
-#endif
-
-	}
-	else
-	{
-		StatusManager::getInstance()->setCurrentStage(&stageMap.at(StatusManager::getInstance()->getCurrentId()));
-		//auto scene = GameScene::createScene(StatusManager::getInstance()->getCurrentStage());
-		auto scene = GameScene::createScene();
-		Director::getInstance()->replaceScene(scene);
-	}
-}
-
-void GameCore::run()
-{
-	StatusManager::getInstance()->setCurrentId(0);
-	StatusManager::getInstance()->setCurrentStage(&stageMap.at(StatusManager::getInstance()->getCurrentId()));
-	//auto scene = GameScene::createScene(StatusManager::getInstance()->getCurrentStage());
-	auto scene = GameScene::createScene();
-	Director::getInstance()->runWithScene(scene);
-}
-/*
-void GameCore::playBgm(std::string bgm)
-{
-	if (bgm != StatusManager::getInstance()->getCurrentBgm())
-		SimpleAudioEngine::getInstance()->playBackgroundMusic(("sounds/bgm/" + bgm).c_str(), false);
-}
-void GameCore::playVoice(std::string voice)
-{
-	//SimpleAudioEngine::getInstance()->stopAllEffects();
-	auto cv = StatusManager::getInstance()->getCurrentVoice();
-	if (cv != 0)
-		SimpleAudioEngine::getInstance()->stopEffect(cv);
-	StatusManager::getInstance()->setCurrentVoice(SimpleAudioEngine::getInstance()->playEffect(("sounds/voice/" +voice).c_str(), false));
-}
-void GameCore::stopBgm()
-{
-	SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-}
-*/

@@ -40,6 +40,21 @@ bool GameScene::init()
 	if (stage == NULL)
 		stage = StatusManager::getInstance()->getCurrentStage();
 
+	//debug
+	/*
+	std::string d = "";
+	std::vector<std::string>* vec = Config::getInstance()->getSupportLanguage();
+	for (auto s: *vec)
+	{
+		d += s;
+		d += "\n";
+	}
+	auto debug = Label::createWithSystemFont(d, "TimesNewRoman", 24);
+	debug->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2));
+	this->addChild(debug, 3);
+	*/
+	//end
+
 	auto label = Label::createWithTTF(stage->getContext(), "fonts/" + stage->getFont(), stage->getFontSize());
 	label->setDimensions(visibleSize.width - 50, Config::conversationHeight);
 	label->setPosition(Vec2(origin.x + label->getContentSize().width / 2 + 50, origin.y + label->getContentSize().height / 2));
@@ -154,16 +169,5 @@ bool GameScene::init()
 
 	stage = NULL;
 	return true;
-}
-
-
-void GameScene::menuCloseCallback(Ref* pSender)
-{
-	GameCore::getInstance()->nextStage();
-}
-
-void GameScene::buttonClickCallback(Ref* pSender, int id)
-{
-	GameCore::getInstance()->nextStage(id);
 }
 

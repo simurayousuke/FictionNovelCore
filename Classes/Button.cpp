@@ -35,7 +35,7 @@ int Button::getNextId()
 
 std::string Button::getFont()
 {
-	return font == "" ? "Marker Felt.ttf" : font;
+	return font == "" ? Local::getDefaultFont() : font;
 }
 
 int Button::getFontSize()

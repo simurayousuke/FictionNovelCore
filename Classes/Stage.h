@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 #include "Button.h"
+#include "Local.h"
 
 class Stage
 {

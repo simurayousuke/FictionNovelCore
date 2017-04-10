@@ -1,0 +1,28 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!--?config version="1.0"-->
+<plist version="1.0">
+<array>
+    <dict>
+        <key>titlecontext</key>
+        <string>测试游戏</string>
+		<key>titlefont</key>
+		<string></string>
+		<key>titlefontsize</key>
+		<string>40</string>
+		<key>titlebg</key>
+		<string>title.png</string>
+		<key>titlebgm</key>
+		<string>mengdenglong.mp3</string>
+		<key>start</key>
+		<string>开始游戏</string>
+		<key>load</key>
+		<string>载入游戏</string>
+		<key>settings</key>
+		<string>游戏设置</string>
+		<key>exit</key>
+		<string>退出游戏</string>
+		<key>about</key>
+		<string>关于我们</string>
+    </dict>   
+</array>	
+</plist>

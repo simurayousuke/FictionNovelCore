@@ -1,20 +1,20 @@
 <!--?xml version="1.0" encoding="UTF-8"?-->
- 
+<!--?stage version="1.0"-->
 <plist version="1.0">
  <array>
     <dict>
         <key>id</key>
         <string>0</string>
         <key>context</key>
-        <string>Rain: That was a nice day.</string>
+        <string>Rain: 那是非常美好的一天。</string>
 		<key>font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>fontsize</key>
 		<string>40</string>
 		<key>hasbutton</key>
 		<string>false</string>
 		<key>bgm</key>
-		<string>night5.mp3</string>
+		<string></string>
 		<key>bg</key>
 		<string>kiminonaha.jpg</string>
 		<key>conversationbg</key>
@@ -28,9 +28,9 @@
         <key>id</key>
         <string>1</string>
         <key>context</key>
-        <string>Rain: What do you want to do?</string>
+        <string>Rain: 你想做什么？</string>
 		<key>font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>fontsize</key>
 		<string>60</string>
 		<key>hasbutton</key>
@@ -38,25 +38,25 @@
 		<key>buttonnum</key>
 		<string>3</string>
 		<key>button0context</key>
-		<string>Tell me something about that day</string>
+		<string>给我讲讲那天的事</string>
 		<key>button0font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>button0fontsize</key>
 		<string>24</string>
 		<key>button0nextid</key>
 		<string>0</string>
 		<key>button1context</key>
-		<string>Kiss</string>
+		<string>亲一口</string>
 		<key>button1font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>button1fontsize</key>
 		<string>24</string>
 		<key>button1nextid</key>
 		<string>3</string>
 		<key>button2context</key>
-		<string>Goodbye</string>
+		<string>再见！</string>
 		<key>button2font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>button2fontsize</key>
 		<string>24</string>
 		<key>button2nextid</key>
@@ -74,9 +74,9 @@
         <key>id</key>
         <string>2</string>
         <key>context</key>
-        <string>Rain: You doesn't care me at all!</string>
+        <string>Rain: 你一点也不在乎我！</string>
 		<key>font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>fontsize</key>
 		<string>32</string>
 		<key>hasbutton</key>
@@ -84,9 +84,9 @@
 		<key>buttonnum</key>
 		<string>1</string>
 		<key>button0context</key>
-		<string>Game over</string>
+		<string>游戏结束</string>
 		<key>button0font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>button0fontsize</key>
 		<string>40</string>
 		<key>button0nextid</key>
@@ -106,9 +106,9 @@
         <key>id</key>
         <string>3</string>
         <key>context</key>
-        <string>Rain: I hate you!</string>
+        <string>Rain: 我讨厌你！</string>
 		<key>font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>fontsize</key>
 		<string>32</string>
 		<key>hasbutton</key>
@@ -116,9 +116,9 @@
 		<key>buttonnum</key>
 		<string>1</string>
 		<key>button0context</key>
-		<string>Game over</string>
+		<string>游戏结束</string>
 		<key>button0font</key>
-		<string>Marker Felt.ttf</string>
+		<string></string>
 		<key>button0fontsize</key>
 		<string>40</string>
 		<key>button0nextid</key>
