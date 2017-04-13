@@ -176,7 +176,7 @@ bool GameScene::init()
 		//this->mouse->setScale(0.2f); //鼠标按键按下，屏幕上的“箭头”尺寸缩小
 		EventMouse* e = (EventMouse*)event;
 		Vec2 position = e->getLocationInView();
-
+		
 		if (e->getMouseButton() == 0)//L0,R1
 		{
 			if (StatusManager::getInstance()->getCurrentStage()->hasButton())

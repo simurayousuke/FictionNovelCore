@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 #include <vector>
+#include "sqlite3/include/sqlite3.h"
+#pragma comment(lib, "F:/cocos/FictionNovelCore/cocos2d/external/sqlite3/libraries/win32/sqlite3.lib")
 
 class Config
 {
@@ -19,6 +21,9 @@ public:
 	void setVoiceLanguage(std::string);
 	void setSupportLanguage(std::vector<std::string>*);
 	void setGameName(std::string);
+	void setDafaultLanguage(std::string,std::string);
+	std::string getDefaultTextLanguage();
+	std::string getDefaultVoiceLanguage();
 private:
 	static Config* instance;
 	Config();

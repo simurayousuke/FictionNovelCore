@@ -9,6 +9,20 @@
 		<string>ロード</string>
 		<key>back</key>
 		<string>戻る</string>
+		<key>loading</key>
+		<string>ロード中</string>
+		<key>loadingconfig</key>
+		<string>ロード ゲーム設定</string>
+		<key>loadinglocal</key>
+		<string>ロード 局在化</string>
+		<key>loadingsound</key>
+		<string>ロード サウンド</string>
+		<key>loadingmaintitle</key>
+		<string>ロード メイン　タイトル</string>
+		<key>loadingsettingsscene</key>
+		<string>ロード 設定画面</string>
+		<key>loadingstages</key>
+		<string>ロード ステージ</string>
     </dict>   
 </array>	
 </plist>

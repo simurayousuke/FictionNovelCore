@@ -9,6 +9,20 @@
 		<string>load</string>
 		<key>back</key>
 		<string>back</string>
+		<key>loading</key>
+		<string>loading</string>
+		<key>loadingconfig</key>
+		<string>loading config</string>
+		<key>loadinglocal</key>
+		<string>loading localization</string>
+		<key>loadingsound</key>
+		<string>loading sound</string>
+		<key>loadingmaintitle</key>
+		<string>loading main title</string>
+		<key>loadingsettingsscene</key>
+		<string>loading settings scene</string>
+		<key>loadingstages</key>
+		<string>loading stages</string>
     </dict>   
 </array>	
 </plist>

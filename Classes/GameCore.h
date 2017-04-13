@@ -9,6 +9,7 @@
 #include "SimpleAudioEngine.h"
 #include "MainTitleScene.h"
 #include "SettingsScene.h"
+#include "LoadScene.h"
 
 class GameCore
 {
@@ -34,6 +35,7 @@ private:
 	void preloadLocal();
 	GameCore();
 	std::map<int, Stage> stageMap;
+	bool firstLoad = true;
 };
 
 #endif // _GAME_CORE_H_

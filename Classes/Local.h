@@ -16,5 +16,13 @@ public:
 	static std::string getDefaultFont(std::string lang);
 	static std::string save;
 	static std::string back;
+
+	static std::string loading;
+	static std::string loadingConfig;
+	static std::string loadingLocal;
+	static std::string loadingSound;
+	static std::string loadingMainTitle;
+	static std::string loadingSettingsScene;
+	static std::string loadingStages;
 };
 #endif _LOCAL_H

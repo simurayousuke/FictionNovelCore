@@ -94,6 +94,7 @@ bool SettingsScene::init()
 				if (buttonRect[i].containsPoint(position))
 				{
 					Config::getInstance()->setLocalLanguage(Config::getInstance()->getSupportLanguage()->at(i));
+					Config::getInstance()->setDafaultLanguage(Config::getInstance()->getLocalLanguage(), Config::getInstance()->getVoiceLanguage());
 					GameCore::getInstance()->reload();
 					GameCore::getInstance()->nextStage(-1);
 				}

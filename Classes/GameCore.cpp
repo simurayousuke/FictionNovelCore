@@ -19,15 +19,12 @@ GameCore* GameCore::getInstance()
 
 void GameCore::init()
 {
-	//装载载入scene
-	//auto scene = MainTitleScene::createScene();
-	//Director::getInstance()->runWithScene(scene);
-
 	preloadConfig();
 	reload();
+	firstLoad = false;
 
-	auto scene = MainTitleScene::createScene();
-	Director::getInstance()->runWithScene(scene);
+	auto title = MainTitleScene::createScene();
+	Director::getInstance()->replaceScene(title);
 }
 
 GameCore::~GameCore()
@@ -85,14 +82,15 @@ void GameCore::preloadConfig()
 	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("config.xml");
 	auto configMap = configVec.at(0).asValueMap();
 	auto supportLanguage = configMap.at("supportlanguage").asString();
+	std::string lang;
 	std::string::size_type pos;
 	std::vector<std::string>* supportLanguages = new std::vector<std::string>();
 	supportLanguage += ",";//扩展字符串以方便操作
-	int size = supportLanguage.size();
-	for (int i = 0; i<size; i++)
+	size_t size = supportLanguage.size();
+	for (size_t i = 0; i < size; i++)
 	{
 		pos = supportLanguage.find(",", i);
-		if (pos<size)
+		if (pos < size)
 		{
 			std::string s = supportLanguage.substr(i, pos - i);
 			supportLanguages->push_back(s);
@@ -100,13 +98,23 @@ void GameCore::preloadConfig()
 		}
 	}
 	Config::getInstance()->setSupportLanguage(supportLanguages);
-	Config::getInstance()->setLocalLanguage(configMap.at("defaultlanguage").asString());
+	lang = Config::getInstance()->getDefaultTextLanguage();
+	if (lang == "none")
+		Config::getInstance()->setLocalLanguage(configMap.at("defaultlanguage").asString());
+	else
+		Config::getInstance()->setLocalLanguage(lang);
 	Config::getInstance()->setGameName(configMap.at("gamename").asString());
-	Config::getInstance()->setVoiceLanguage(configMap.at("defaultvoicelanguage").asString());
+	lang = Config::getInstance()->getDefaultVoiceLanguage();
+	if (lang == "none")
+		Config::getInstance()->setVoiceLanguage(configMap.at("defaultvoicelanguage").asString());
+	else
+		Config::getInstance()->setVoiceLanguage(lang);
 }
 
 void GameCore::preloadMainTitle()
 {
+	if (firstLoad)
+		LoadScene::updateLabel(Local::loadingMainTitle);
 	ValueVector titleVec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/title.xml");
 	auto titleMap = titleVec.at(0).asValueMap();
 	MainTitleScene::titleContext = titleMap.at("titlecontext").asString();
@@ -123,6 +131,8 @@ void GameCore::preloadMainTitle()
 
 void GameCore::preloadStages()
 {
+	if (firstLoad)
+		LoadScene::updateLabel(Local::loadingStages);
 	ValueVector txt_vec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/stages.xml");//读取xml文档,放入ValueVector中	
 	for (auto& e : txt_vec)
 	{
@@ -154,7 +164,11 @@ void GameCore::preloadStages()
 		auto bgm = thisStageMap.at("bgm").asString();
 		stage.setBgm(bgm);
 		if (bgm != "")
+		{
+			if (firstLoad)
+				LoadScene::updateLabel(Local::loadingSound);
 			SimpleAudioEngine::getInstance()->preloadBackgroundMusic(("sounds/bgm/" + bgm).c_str());//wav,mp3,mid
+		}
 
 		stage.setBg(thisStageMap.at("bg").asString());
 		stage.setConversationBg(thisStageMap.at("conversationbg").asString());
@@ -162,7 +176,11 @@ void GameCore::preloadStages()
 		auto voice = thisStageMap.at("voice").asString();
 		stage.setVoice(voice);
 		if (voice != "")
+		{
+			if (firstLoad)
+				LoadScene::updateLabel(Local::loadingSound);
 			SimpleAudioEngine::getInstance()->preloadEffect(("sounds/voice/" + Config::getInstance()->getVoiceLanguage() + "/" + voice).c_str());//wav,mid
+		}
 		stageMap[thisStageMap.at("id").asInt()] = stage;
 	}
 }
@@ -170,6 +188,18 @@ void GameCore::preloadStages()
 void GameCore::reload()
 {
 	preloadLocal();
+	//装载载入scene
+
+	if (firstLoad)
+	{
+		auto scene = LoadScene::createScene();
+		Director::getInstance()->runWithScene(scene);
+	}
+	else
+	{
+		auto scene = LoadScene::createScene();
+		Director::getInstance()->replaceScene(scene);
+	}
 	preloadMainTitle();
 	preloadStages();
 	preloadSettingsScene();
@@ -179,11 +209,13 @@ void GameCore::reload()
 
 void GameCore::preloadSettingsScene()
 {
+	if (firstLoad)
+		LoadScene::updateLabel(Local::loadingSettingsScene);
 	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("local/default.xml");
 	auto configMap = configVec.at(0).asValueMap();
-	
+
 	SettingsScene::jp = configMap.at("jp").asString();
-	SettingsScene::cn = configMap.at("cn").asString(); 
+	SettingsScene::cn = configMap.at("cn").asString();
 	SettingsScene::en = configMap.at("en").asString();
 }
 
@@ -205,10 +237,18 @@ void GameCore::settings()
 
 void GameCore::preloadLocal()
 {
-	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("local/"+Config::getInstance()->getLocalLanguage()+"/default.xml");
+	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("local/" + Config::getInstance()->getLocalLanguage() + "/default.xml");
 	auto configMap = configVec.at(0).asValueMap();
 
 	Local::save = configMap.at("save").asString();
 	Local::load = configMap.at("load").asString();
 	Local::back = configMap.at("back").asString();
+
+	Local::loading = configMap.at("loading").asString();
+	Local::loadingConfig = configMap.at("loadingconfig").asString();
+	Local::loadingLocal = configMap.at("loadinglocal").asString();
+	Local::loadingSound = configMap.at("loadingsound").asString();
+	Local::loadingMainTitle = configMap.at("loadingmaintitle").asString();
+	Local::loadingSettingsScene = configMap.at("loadingsettingsscene").asString();
+	Local::loadingStages = configMap.at("loadingstages").asString();
 }

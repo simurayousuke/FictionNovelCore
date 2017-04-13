@@ -83,15 +83,13 @@ void StatusManager::load()
 	char **re;//查询结果
 	int r, c;//行、列
 	sqlite3_get_table(pdb, "select * from savings", &re, &r, &c, NULL);//1
-	//log("row is %d,column is %d", r, c);	
-	//log("%s", re[r*c + 2]);
-	if (r < 1)
-		return;
-	//log(re[r*c + 1]);
-	currentId = std::stoi(re[r*c + 1]);
-	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-	GameCore::getInstance()->nextStage(currentId);
 
+	if (r >= 1)
+	{
+		currentId = std::stoi(re[r*c + 1]);
+		CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+		GameCore::getInstance()->nextStage(currentId);
+	}
 	sqlite3_free_table(re);
 	sqlite3_close(pdb);
 }

@@ -9,6 +9,20 @@
 		<string>读档</string>
 		<key>back</key>
 		<string>返回</string>
+		<key>loading</key>
+		<string>载入中</string>
+		<key>loadingconfig</key>
+		<string>正在载入 游戏配置</string>
+		<key>loadinglocal</key>
+		<string>正在载入 本地化</string>
+		<key>loadingsound</key>
+		<string>正在载入 声音</string>
+		<key>loadingmaintitle</key>
+		<string>正在载入 主菜单</string>
+		<key>loadingsettingsscene</key>
+		<string>正在载入 设置菜单</string>
+		<key>loadingstages</key>
+		<string>正在载入 游戏舞台</string>
     </dict>   
 </array>	
 </plist>
