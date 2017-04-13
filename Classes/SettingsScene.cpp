@@ -7,6 +7,9 @@ using namespace CocosDenshion;
 int SettingsScene::buttonNum = 0;
 cocos2d::Rect* SettingsScene::buttonRect = NULL;
 cocos2d::Rect SettingsScene::backRect = cocos2d::Rect();
+std::string SettingsScene::cn = "";
+std::string SettingsScene::jp = "";
+std::string SettingsScene::en = "";
 
 Scene* SettingsScene::createScene()
 {
@@ -35,7 +38,7 @@ bool SettingsScene::init()
 	for (int i = 0; i < buttonNum; ++i)
 	{
 		//½¨Á¢button
-		auto buttonItem = Label::createWithTTF((*splVec)[i], "fonts/" + Local::getDefaultFont((*splVec)[i]), 30);
+		auto buttonItem = Label::createWithTTF(getLocalText((*splVec)[i]), "fonts/" + Local::getDefaultFont((*splVec)[i]), 30);
 		buttonItem->setPosition(Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height*0.5 / buttonNum*(i + 1)));
 		this->addChild(buttonItem, 2);
 
@@ -47,7 +50,7 @@ bool SettingsScene::init()
 		buttonRect[i] = buttonBg->getBoundingBox();
 	}
 
-	auto labelBack = Label::createWithTTF("back", "fonts/" + Local::getDefaultFont(), 24);
+	auto labelBack = Label::createWithTTF(Local::back, "fonts/" + Local::getDefaultFont(), 24);
 	labelBack->setPosition(Vec2(origin.x + visibleSize.width - labelBack->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelBack->getContentSize().height / 2 - 30));
 	this->addChild(labelBack, 2);
 	auto backBg = Sprite::create("assets/conversationBg.png");
@@ -109,4 +112,15 @@ bool SettingsScene::init()
 
 
 	return true;
+}
+
+std::string SettingsScene::getLocalText(std::string local)
+{
+	if (local == "jp")
+		return jp;
+	if (local == "cn")
+		return cn;
+	if (local == "en")
+		return en;
+	return "unknown";
 }

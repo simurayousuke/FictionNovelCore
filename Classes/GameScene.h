@@ -25,5 +25,6 @@ private:
 	static cocos2d::Rect textRect;
 	static cocos2d::Rect saveRect;
 	static cocos2d::Rect backRect;
+	static cocos2d::Rect loadRect;
 };
 #endif // __Game_SCENE_H__

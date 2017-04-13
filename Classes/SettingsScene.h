@@ -9,7 +9,7 @@ class SettingsScene : public cocos2d::Layer
 {
 public:
 	static cocos2d::Scene* createScene();
-
+	static std::string cn, jp, en;
 	virtual bool init();
 
 	// implement the "static create()" method manually
@@ -19,5 +19,6 @@ private:
 	static int buttonNum;
 	static cocos2d::Rect* buttonRect;
 	static cocos2d::Rect backRect;
+	static std::string getLocalText(std::string local);
 };
 #endif // __SETTINGS_SCENE_H__

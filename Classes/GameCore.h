@@ -31,6 +31,7 @@ private:
 	void preloadSettingsScene();
 	void preloadLoadScene();
 	void preloadAboutScene();
+	void preloadLocal();
 	GameCore();
 	std::map<int, Stage> stageMap;
 };

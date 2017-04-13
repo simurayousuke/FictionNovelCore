@@ -1,0 +1,14 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!--?config version="1.0"-->
+<plist version="1.0">
+<array>
+    <dict>
+        <key>save</key>
+        <string>存档</string>
+		<key>load</key>
+		<string>读档</string>
+		<key>back</key>
+		<string>返回</string>
+    </dict>   
+</array>	
+</plist>

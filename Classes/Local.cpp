@@ -1,5 +1,9 @@
 #include "Local.h"
 
+std::string Local::back="back";
+std::string Local::save="save";
+std::string Local::load="load";
+
 std::string Local::getDefaultFont()
 {
 	auto local = Config::getInstance()->getLocalLanguage();
@@ -9,6 +13,7 @@ std::string Local::getDefaultFont()
 		return "stfangsong.ttf";
 	if (local == "jp")
 		return "yumin.ttf";
+	return "Marker Felt.ttf";
 }
 
 std::string Local::getDefaultFont(std::string lang)
@@ -19,4 +24,5 @@ std::string Local::getDefaultFont(std::string lang)
 		return "stfangsong.ttf";
 	if (lang == "jp")
 		return "yumin.ttf";
+	return "Marker Felt.ttf";
 }

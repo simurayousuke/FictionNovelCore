@@ -24,8 +24,7 @@ void GameCore::init()
 	//Director::getInstance()->runWithScene(scene);
 
 	preloadConfig();
-	preloadMainTitle();
-	preloadStages();
+	reload();
 
 	auto scene = MainTitleScene::createScene();
 	Director::getInstance()->runWithScene(scene);
@@ -170,6 +169,7 @@ void GameCore::preloadStages()
 
 void GameCore::reload()
 {
+	preloadLocal();
 	preloadMainTitle();
 	preloadStages();
 	preloadSettingsScene();
@@ -179,7 +179,12 @@ void GameCore::reload()
 
 void GameCore::preloadSettingsScene()
 {
-
+	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("local/default.xml");
+	auto configMap = configVec.at(0).asValueMap();
+	
+	SettingsScene::jp = configMap.at("jp").asString();
+	SettingsScene::cn = configMap.at("cn").asString(); 
+	SettingsScene::en = configMap.at("en").asString();
 }
 
 void GameCore::preloadLoadScene()
@@ -196,4 +201,14 @@ void GameCore::settings()
 {
 	auto scene = SettingsScene::createScene();
 	Director::getInstance()->replaceScene(scene);
+}
+
+void GameCore::preloadLocal()
+{
+	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("local/"+Config::getInstance()->getLocalLanguage()+"/default.xml");
+	auto configMap = configVec.at(0).asValueMap();
+
+	Local::save = configMap.at("save").asString();
+	Local::load = configMap.at("load").asString();
+	Local::back = configMap.at("back").asString();
 }

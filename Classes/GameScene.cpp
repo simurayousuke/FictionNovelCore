@@ -11,6 +11,7 @@ cocos2d::Rect* GameScene::buttonRect = NULL;
 cocos2d::Rect GameScene::textRect = cocos2d::Rect();
 cocos2d::Rect GameScene::saveRect = cocos2d::Rect();
 cocos2d::Rect GameScene::backRect = cocos2d::Rect();
+cocos2d::Rect GameScene::loadRect = cocos2d::Rect();
 
 Scene* GameScene::createScene()
 {
@@ -99,7 +100,7 @@ bool GameScene::init()
 	this->addChild(conversationBg, 1);
 	textRect = conversationBg->getBoundingBox();
 
-	auto labelBack = Label::createWithTTF("quit", "fonts/" + Local::getDefaultFont(), 24);
+	auto labelBack = Label::createWithTTF(Local::back, "fonts/" + Local::getDefaultFont(), 24);
 	labelBack->setPosition(Vec2(origin.x + visibleSize.width - labelBack->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelBack->getContentSize().height / 2 - 30));
 	this->addChild(labelBack, 2);
 	auto backBg = Sprite::create("assets/conversationBg.png");
@@ -108,7 +109,7 @@ bool GameScene::init()
 	this->addChild(backBg, 1);
 	backRect = backBg->getBoundingBox();
 
-	auto labelSave = Label::createWithTTF("save", "fonts/" + Local::getDefaultFont(), 24);
+	auto labelSave = Label::createWithTTF(Local::save, "fonts/" + Local::getDefaultFont(), 24);
 	labelSave->setPosition(Vec2(backRect.getMinX() - labelSave->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelSave->getContentSize().height / 2 - 30));
 	this->addChild(labelSave, 2);
 	auto saveBg = Sprite::create("assets/conversationBg.png");
@@ -116,6 +117,15 @@ bool GameScene::init()
 	saveBg->setScale((labelSave->getContentSize().width + 50) / saveBg->getContentSize().width, (labelSave->getContentSize().height + 20) / saveBg->getContentSize().height);
 	this->addChild(saveBg, 1);
 	saveRect = saveBg->getBoundingBox();
+
+	auto labelLoad = Label::createWithTTF(Local::load, "fonts/" + Local::getDefaultFont(), 24);
+	labelLoad->setPosition(Vec2(saveRect.getMinX() - labelLoad->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelLoad->getContentSize().height / 2 - 30));
+	this->addChild(labelLoad, 2);
+	auto loadBg = Sprite::create("assets/conversationBg.png");
+	loadBg->setPosition(Vec2(saveRect.getMinX() - labelLoad->getContentSize().width / 2 - 30, origin.y + visibleSize.height - labelLoad->getContentSize().height / 2 - 30));
+	loadBg->setScale((labelLoad->getContentSize().width + 50) / loadBg->getContentSize().width, (labelLoad->getContentSize().height + 20) / loadBg->getContentSize().height);
+	this->addChild(loadBg, 1);
+	loadRect = loadBg->getBoundingBox();
 
 	if (stage->hasButton())
 	{
@@ -179,6 +189,8 @@ bool GameScene::init()
 				StatusManager::getInstance()->save();
 			if (backRect.containsPoint(position))
 				GameCore::getInstance()->nextStage(-1);
+			if (loadRect.containsPoint(position))
+				StatusManager::getInstance()->load();
 		}
 	};
 

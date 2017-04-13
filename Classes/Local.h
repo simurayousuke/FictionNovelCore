@@ -14,5 +14,7 @@ public:
 	static std::string exit;
 	static std::string about;
 	static std::string getDefaultFont(std::string lang);
+	static std::string save;
+	static std::string back;
 };
 #endif _LOCAL_H

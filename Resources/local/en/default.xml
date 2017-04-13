@@ -1,0 +1,14 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<!--?config version="1.0"-->
+<plist version="1.0">
+<array>
+    <dict>
+        <key>save</key>
+        <string>save</string>
+		<key>load</key>
+		<string>load</string>
+		<key>back</key>
+		<string>back</string>
+    </dict>   
+</array>	
+</plist>
