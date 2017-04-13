@@ -50,7 +50,10 @@ void StatusManager::setCurrentVoice(unsigned int voice)
 void StatusManager::save()
 {
 	sqlite3 *pdb = NULL;//1
-	std::string path = FileUtils::getInstance()->getWritablePath() + "save.db";//2
+	std::string directory = FileUtils::getInstance()->getWritablePath() + Config::getInstance()->getGameName();
+	if (!FileUtils::getInstance()->isDirectoryExist(directory))
+		FileUtils::getInstance()->createDirectory(directory);
+	std::string path = directory + "/save.db";//2
 	
 	std::string sql;
 	int result;
@@ -72,7 +75,10 @@ void StatusManager::save()
 void StatusManager::load()
 {
 	sqlite3 *pdb = NULL;//1
-	std::string path = FileUtils::getInstance()->getWritablePath() + "save.db";//2
+	std::string directory = FileUtils::getInstance()->getWritablePath() + Config::getInstance()->getGameName();
+	if (!FileUtils::getInstance()->isDirectoryExist(directory))
+		FileUtils::getInstance()->createDirectory(directory);
+	std::string path = directory+ "/save.db";//2
 
 	std::string sql;
 	int result;

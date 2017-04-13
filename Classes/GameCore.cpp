@@ -81,6 +81,7 @@ void GameCore::preloadConfig()
 {
 	ValueVector configVec = FileUtils::getInstance()->getValueVectorFromFile("config.xml");
 	auto configMap = configVec.at(0).asValueMap();
+	Config::getInstance()->setGameName(configMap.at("gamename").asString());
 	auto supportLanguage = configMap.at("supportlanguage").asString();
 	std::string lang;
 	std::string::size_type pos;
@@ -103,7 +104,6 @@ void GameCore::preloadConfig()
 		Config::getInstance()->setLocalLanguage(configMap.at("defaultlanguage").asString());
 	else
 		Config::getInstance()->setLocalLanguage(lang);
-	Config::getInstance()->setGameName(configMap.at("gamename").asString());
 	lang = Config::getInstance()->getDefaultVoiceLanguage();
 	if (lang == "none")
 		Config::getInstance()->setVoiceLanguage(configMap.at("defaultvoicelanguage").asString());

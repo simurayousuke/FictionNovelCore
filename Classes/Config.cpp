@@ -54,7 +54,10 @@ Config::~Config()
 void Config::setDafaultLanguage(std::string lang, std::string voice)
 {
 	sqlite3 *pdb = NULL;//1
-	std::string path = FileUtils::getInstance()->getWritablePath() + "config.db";//2
+	std::string directory = FileUtils::getInstance()->getWritablePath() + getGameName();
+	if (!FileUtils::getInstance()->isDirectoryExist(directory))
+		FileUtils::getInstance()->createDirectory(directory);
+	std::string path = directory + "/config.db";//2
 
 	std::string sql;
 	int result;
@@ -81,7 +84,10 @@ void Config::setDafaultLanguage(std::string lang, std::string voice)
 std::string Config::getDefaultTextLanguage()
 {
 	sqlite3 *pdb = NULL;
-	std::string path = FileUtils::getInstance()->getWritablePath() + "config.db";
+	std::string directory = FileUtils::getInstance()->getWritablePath() + getGameName();
+	if (!FileUtils::getInstance()->isDirectoryExist(directory))
+		FileUtils::getInstance()->createDirectory(directory);
+	std::string path = directory + "/config.db";
 	std::string res;
 	std::string sql;
 	int result;
@@ -105,7 +111,10 @@ std::string Config::getDefaultTextLanguage()
 std::string Config::getDefaultVoiceLanguage()
 {
 	sqlite3 *pdb = NULL;
-	std::string path = FileUtils::getInstance()->getWritablePath() + "config.db";
+	std::string directory = FileUtils::getInstance()->getWritablePath() + getGameName();
+	if (!FileUtils::getInstance()->isDirectoryExist(directory))
+		FileUtils::getInstance()->createDirectory(directory);
+	std::string path = directory + "/config.db";
 	std::string res;
 	std::string sql;
 	int result;

@@ -1,11 +1,14 @@
-del /f/s/q .\Release.win32\*.obj
-del /f/s/q .\Release.win32\*.lib
-del /f/s/q .\Release.win32\*.exp
-del /f/s/q .\Release.win32\*.iobj
-del /f/s/q .\Release.win32\*.ipdb
-del /f/s/q .\Release.win32\*.log
-del /f/s/q .\Release.win32\*.pdb
-del /f/s/q .\Release.win32\*.cache
-del /f/s/q .\Release.win32\*.res
-rd /s/q .\Release.win32\FictionNovelCore.tlog
-rd /s/q .\Release.win32\res
+rd /s/q .\release
+xcopy .\Release.win32 .\release /e
+set path=release
+del /f/s/q .\%path%\*.obj
+del /f/s/q .\%path%\*.lib
+del /f/s/q .\%path%\*.exp
+del /f/s/q .\%path%\*.iobj
+del /f/s/q .\%path%\*.ipdb
+del /f/s/q .\%path%\*.log
+del /f/s/q .\%path%\*.pdb
+del /f/s/q .\%path%\*.cache
+del /f/s/q .\%path%\*.res
+rd /s/q .\%path%\FictionNovelCore.tlog
+rd /s/q .\%path%\res
